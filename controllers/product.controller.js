@@ -27,8 +27,13 @@ exports.Single = async (req, res, next) => {
 
 exports.Create = async (req, res, next) => {
   try {
-    const{name,price,quantity}=req.body
-    const product = await Product.create({name,price,quantity,createdby:req.user.id});
+    const { name, price, quantity } = req.body;
+    const product = await Product.create({
+      name,
+      price,
+      quantity,
+      createdby: req.user.id,
+    });
     res.json(product);
   } catch (error) {
     console.log(error);
@@ -40,8 +45,11 @@ exports.Update = async (req, res, next) => {
   try {
     const { id } = req.params;
     const isCheck = await Product.findById(id);
-    if(req.user.id !=isCheck.createdby) return next(createError("The content owner only edit the data"))
-    const product = await Product.findByIdAndUpdate(id, req.body,{new:true});
+    if (req.user.id != isCheck.createdby)
+      return next(createError("The content owner only edit the data"));
+    const product = await Product.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
@@ -56,7 +64,8 @@ exports.Delete = async (req, res, next) => {
   try {
     const { id } = req.params;
     const isCheck = await Product.findById(id);
-    if(req.user.id !=isCheck.createdby) return next(createError("The content owner only edit the data"))
+    if (req.user.id != isCheck.createdby)
+      return next(createError("The content owner only edit the data"));
     const product = await Product.findByIdAndDelete(id);
 
     if (!product) {

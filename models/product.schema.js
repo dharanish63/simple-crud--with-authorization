@@ -23,13 +23,12 @@ const ProductSchema = mongoose.Schema(
       type: String,
       required: false,
     },
-    createdby:String
+    createdby: String,
   },
   {
     timestamps: true,
   }
 );
-
 
 const Product = mongoose.model("Product", ProductSchema);
 

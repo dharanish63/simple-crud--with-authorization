@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const {verifytoken} = require('../jwttoken')
+const {validation} =require('../validators/product.validation')
+const { verifytoken } = require("../jwttoken");
 const {
   Create,
   List,
@@ -13,9 +14,9 @@ router.get("/", List);
 router.get("/:id", Single);
 
 /* Protected route */
-router.post("/",verifytoken, Create);
-router.put("/:id",verifytoken, Update);
-router.delete("/:id",verifytoken, Delete);
+router.post("/",validation, verifytoken, Create);
+router.put("/:id", verifytoken, Update);
+router.delete("/:id", verifytoken, Delete);
 
 module.exports = router;
 

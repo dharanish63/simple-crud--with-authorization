@@ -25,7 +25,9 @@ app.use((error, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 mongoose
-  .connect("mongodb+srv://dharanish235:Dharanish001@node.6y27j.mongodb.net/sample")
+  .connect(
+    "mongodb+srv://dharanish235:Dharanish001@node.6y27j.mongodb.net/sample"
+  )
   .then(() => {
     console.log("database connected");
     app.listen(PORT, () => {
